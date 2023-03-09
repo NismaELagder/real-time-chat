@@ -1,6 +1,8 @@
 var app = require("express")();
 var http = require("http").Server(app);
 var io = require("socket.io")(http);
+const PORT = process.env.PORT || 2323;
+
 var path = require("path");
 app.get("/", function (req, res) {
   res.sendFile(path.join(__dirname, "./index.html"));
@@ -25,6 +27,6 @@ io.on("connection", function (socket) {
     io.sockets.emit("newmsg", data);
   });
 });
-http.listen(3000, function () {
+http.listen(PORT, function () {
   console.log("listening on localhost:3000");
 });
